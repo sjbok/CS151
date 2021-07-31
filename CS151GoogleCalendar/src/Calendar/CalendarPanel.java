@@ -5,12 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.time.LocalDate;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 public class CalendarPanel extends JPanel
 {
@@ -45,10 +40,12 @@ public class CalendarPanel extends JPanel
 		JButton previousButton = new JButton("<");
 		
 		today.addActionListener(event ->
-		changeMonths("t"));	
+		changeMonths("t"));
 		
 		JButton create = new JButton("CREATE");
 		create.setBackground(Color.RED);
+		create.addActionListener(event ->
+				createEvent());
 
 		// Add components
 		buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
@@ -68,7 +65,7 @@ public class CalendarPanel extends JPanel
 	
 	public void draw(LocalDate cal) 
 	{		
-		Calendar c = new Calendar();		
+		Calendar c = new Calendar();
 		calPanel = new JPanel();
 		calPanel.setLayout(new BoxLayout(calPanel, BoxLayout.X_AXIS));
 		calPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -120,5 +117,8 @@ public class CalendarPanel extends JPanel
 		this.draw(temp);
 		this.revalidate();		
 	}
-	
+
+		public void createEvent(){
+		EventPanel event = new EventPanel();
+	}
 }
