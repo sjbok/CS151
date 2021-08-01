@@ -16,13 +16,12 @@ public class CalendarPanel extends JPanel {
 	private JPanel createPanel;
 	private JPanel calPanel;
 	private JPanel[] days;
-	private CalendarEvents events;
+	private CalendarEvents calendarEvents;
 
 	public CalendarPanel(CalendarEvents e) {
+		calendarEvents = e;
 		int width = 360;
 		int height = 450;
-
-		events = e;
 
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setPreferredSize(new Dimension(width, height));
@@ -114,7 +113,7 @@ public class CalendarPanel extends JPanel {
 	}
 
 	public void createEvent() {
-		EventPanel ep = new EventPanel();
+		EventPanel ep = new EventPanel(calendarEvents);
 		JFrame frame = new JFrame("Create Event");
 		frame.setResizable(false);
 		frame.getContentPane().add (ep);

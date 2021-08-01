@@ -9,8 +9,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class EventPanel extends JPanel implements ItemListener{
     private Event create;
@@ -25,8 +23,9 @@ public class EventPanel extends JPanel implements ItemListener{
     private JButton save;
     private String[] time = {"00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00",
             "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00" , "22:00", "23:00"};
+    private CalendarEvents calendarEvents;
 
-    public EventPanel(){
+    public EventPanel(CalendarEvents ce){
         this.setPreferredSize(new Dimension(300,300));
 
         LocalTime ld = LocalTime.now();
@@ -75,6 +74,7 @@ public class EventPanel extends JPanel implements ItemListener{
                 TimeInterval ti = new TimeInterval(start.getSelectedItem().toString(), end.getSelectedItem().toString());
                 LocalDate ld = LocalDate.of(Integer.parseInt(years.getText()), Integer.parseInt(monthBox.getSelectedItem().toString()), Integer.parseInt(dayBox.getSelectedItem().toString()));
                 create = new Event(title.getText(), ti, ld);
+                ce.add(create);
             }
         });
 

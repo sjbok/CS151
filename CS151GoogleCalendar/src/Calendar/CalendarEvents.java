@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CalendarEvents {
-    private static HashMap<LocalDate, ArrayList<Event>> hash;
-
+    private HashMap<LocalDate, ArrayList<Event>> hash;
     /**
      * Takes events of specific date and adds into HashMap. HashMap is then sorted by time
      */
