@@ -128,16 +128,11 @@ public class CalendarPanel extends JPanel {
 	}
 
 	public void createEvent() {
-		EventPanel event = new EventPanel();
-		event.getEvent();
-		add(event.getEvent(), event.getDate());
-
-
 		JFrame frame = new JFrame("Create Event");
 		frame.setResizable(false);
-		frame.getContentPane().add(new EventPanel());
+		frame.getContentPane().add (new EventPanel());
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+		frame.setVisible (true);
 	}
 }
