@@ -2,6 +2,7 @@ package Calendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.*;
 
 public class CalendarGUI 
 {
@@ -9,7 +10,7 @@ public class CalendarGUI
 	JPanel panel;
 	CalendarPanel calPanel;
 	ViewPanel viewPanel;
-	
+
 	public CalendarGUI() 
 	{
 		frame = new JFrame();
@@ -18,14 +19,16 @@ public class CalendarGUI
 		frame.setResizable(false);
 
 		panel = new JPanel();
+
 		calPanel = new CalendarPanel();
-		viewPanel = new ViewPanel();	
+		viewPanel = new ViewPanel();
 
 		panel.add(calPanel);
 		panel.add(viewPanel);
 		frame.add(panel);
 
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 	

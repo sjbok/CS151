@@ -34,6 +34,16 @@ public class DayComponent extends JComponent
 		return day;
 	}
 	
+	public int getMonth()
+	{
+		return month;
+	}
+	
+	public int getYear()
+	{
+		return year;
+	}
+	
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);

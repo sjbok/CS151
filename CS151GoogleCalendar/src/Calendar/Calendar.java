@@ -12,6 +12,9 @@ import javax.swing.*;
 public class Calendar extends JPanel
 {	
 	private ArrayList<DayComponent> day = new ArrayList<DayComponent>();
+	public static int selectDay;
+	public static int selectMonth;
+	public static int selectYear;
 	
 	public JPanel[] printCalendar(LocalDate c)
 	{  
@@ -171,6 +174,9 @@ public class Calendar extends JPanel
 								{
 									day.get(i).changeColour();
 									day.get(i).repaint();
+									selectDay = day.get(i).getDay();
+									selectMonth = day.get(i).getMonth();
+									selectYear = day.get(i).getYear();
 								}
 								else
 								{
@@ -189,6 +195,9 @@ public class Calendar extends JPanel
 				}
 			}
 		}		
+		selectDay = LocalDate.now().getDayOfMonth();
+		selectMonth = LocalDate.now().getMonthValue();
+		selectYear = LocalDate.now().getYear();
 		return calPanel;
 	}
 }
