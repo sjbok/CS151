@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.*;
 
 public class CalendarPanel extends JPanel
@@ -15,6 +17,26 @@ public class CalendarPanel extends JPanel
 	private JPanel createPanel;
 	private JPanel calPanel;
 	private JPanel[] days;
+
+	HashMap<LocalDate, ArrayList<Event>> hash = new HashMap<LocalDate, ArrayList<Event>>();
+
+	/**
+	 * Takes events of specific date and adds into HashMap. HashMap is then sorted by time
+	 */
+	public void add(Event e, LocalDate ld)
+	{
+		ArrayList<Event> events = new ArrayList<Event>(); // Declare new event
+		if(hash.containsKey(ld)) // Checking if hash already has events on that date
+		{
+			hash.get(ld).add(e); // Hash adds more events on that date
+		}
+		else
+		{
+			events.add(e); // New event
+			hash.put(ld, events); // Puts new event into HashMap with new key
+		}
+		ArrayList<Event> test = hash.get(ld); // Declare new event list containing all events from HashMap on that day
+	}
 	
 	public CalendarPanel()
 	{	
@@ -120,5 +142,7 @@ public class CalendarPanel extends JPanel
 
 		public void createEvent(){
 		EventPanel event = new EventPanel();
+		event.getEvent();
+		add(event.getEvent(), event.getDate());
 	}
 }
