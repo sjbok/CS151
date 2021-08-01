@@ -4,6 +4,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,9 +18,12 @@ import javax.swing.JTextArea;
 public class ViewPanel extends JPanel
 {
 	private final JTextArea viewArea;
+	private CalendarEvents calendarEvents;
 	
-	public ViewPanel()
+	public ViewPanel(CalendarEvents e)
 	{
+		calendarEvents = e;
+
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setPreferredSize(new Dimension(500, 600));	
 		this.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -47,4 +54,21 @@ public class ViewPanel extends JPanel
 		this.add(buttonPanel);
 		this.add(viewArea);		
 	}
+
+
+	public void viewByDay(LocalDate t){
+		// add functionality to viewByDay
+	}
+
+	/**
+	 * Prints the calendar view by month
+	 * @param m month
+	 * @param d day
+	 * @param y year
+	 */
+
+	public void viewByWeek(Month m, int d, int y){
+		//add functionality to viewByWeek
+	}
+
 }

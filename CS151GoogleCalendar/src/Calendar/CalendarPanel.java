@@ -18,11 +18,11 @@ public class CalendarPanel extends JPanel {
 	private JPanel[] days;
 	private CalendarEvents events;
 
-	public CalendarPanel() {
+	public CalendarPanel(CalendarEvents e) {
 		int width = 360;
 		int height = 450;
 
-		events = new CalendarEvents();
+		events = e;
 
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setPreferredSize(new Dimension(width, height));

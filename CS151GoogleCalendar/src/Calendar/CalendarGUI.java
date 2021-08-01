@@ -10,9 +10,11 @@ public class CalendarGUI
 	JPanel panel;
 	CalendarPanel calPanel;
 	ViewPanel viewPanel;
+	private CalendarEvents calendarEvents;
 
 	public CalendarGUI() 
 	{
+		calendarEvents = new CalendarEvents();
 		frame = new JFrame();
 		frame.setTitle("Google Calendar");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,8 +22,8 @@ public class CalendarGUI
 
 		panel = new JPanel();
 
-		calPanel = new CalendarPanel();
-		viewPanel = new ViewPanel();
+		calPanel = new CalendarPanel(calendarEvents);
+		viewPanel = new ViewPanel(calendarEvents);
 
 		panel.add(calPanel);
 		panel.add(viewPanel);

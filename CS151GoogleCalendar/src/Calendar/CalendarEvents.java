@@ -26,4 +26,8 @@ public class CalendarEvents {
         }
         ArrayList<Event> test = hash.get(e.getDate()); // Declare new event list containing all events from HashMap on that day
     }
+
+    public void getEvents(){
+        // add functionality to get events for viewBy
+    }
 }
