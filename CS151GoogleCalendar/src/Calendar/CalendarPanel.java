@@ -16,27 +16,13 @@ public class CalendarPanel extends JPanel {
 	private JPanel createPanel;
 	private JPanel calPanel;
 	private JPanel[] days;
-
-	HashMap<LocalDate, ArrayList<Event>> hash = new HashMap<LocalDate, ArrayList<Event>>();
-
-	/**
-	 * Takes events of specific date and adds into HashMap. HashMap is then sorted by time
-	 */
-	public void add(Event e, LocalDate ld) {
-		ArrayList<Event> events = new ArrayList<Event>(); // Declare new event
-		if (hash.containsKey(ld)) // Checking if hash already has events on that date
-		{
-			hash.get(ld).add(e); // Hash adds more events on that date
-		} else {
-			events.add(e); // New event
-			hash.put(ld, events); // Puts new event into HashMap with new key
-		}
-		ArrayList<Event> test = hash.get(ld); // Declare new event list containing all events from HashMap on that day
-	}
+	private CalendarEvents events;
 
 	public CalendarPanel() {
 		int width = 360;
 		int height = 450;
+
+		events = new CalendarEvents();
 
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setPreferredSize(new Dimension(width, height));
@@ -128,9 +114,10 @@ public class CalendarPanel extends JPanel {
 	}
 
 	public void createEvent() {
+		EventPanel ep = new EventPanel();
 		JFrame frame = new JFrame("Create Event");
 		frame.setResizable(false);
-		frame.getContentPane().add (new EventPanel());
+		frame.getContentPane().add (ep);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible (true);
