@@ -18,12 +18,12 @@ public class TimeInterval
 		return st + " - " + et;
 	}
 	
-	public LocalTime getst() 
+	public LocalTime getst()
 	{
 		return st;
 	}
 	
-	public LocalTime getet() 
+	public LocalTime getet()
 	{
 		return et;
 	}

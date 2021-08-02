@@ -1,29 +1,44 @@
 package Calendar;
 
-public class TimeInterval 
-{
-	private int st;
-	private int et;
-	
-	public TimeInterval(int st, int et)
-	{
-		this.st = st;
-		this.et = et;
+import java.time.LocalTime;
+
+/**
+ * Time interval class that is used in the event class
+ */
+public class TimeInterval {
+	private LocalTime start;
+	private LocalTime end;
+
+	/**
+	 * Creates a time interval
+	 * @param s start time
+	 * @param e end time
+	 */
+	TimeInterval(String s, String e){
+		s.replace(":", "");
+		e.replace(":", "");
+
+		start = LocalTime.parse(s);
+		end = LocalTime.parse(e);
+		this.start = start;
+		this.end = end;
 	}
 	
-	public String toString() 
+	public LocalTime getst()
 	{
-		return st + " - " + et;
+		return start;
 	}
 	
-	public int getst() 
+	public LocalTime getet()
 	{
-		return st;
+		return end;
 	}
-	
-	public int getet() 
-	{
-		return et;
+
+	/**
+	 * @return appended string of time interval
+	 */
+	public String getTime(){
+		return start.toString() + " - " + end.toString();
 	}
-	
+
 }
