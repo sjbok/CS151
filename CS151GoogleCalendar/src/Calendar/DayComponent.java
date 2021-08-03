@@ -10,8 +10,8 @@ import javax.swing.JComponent;
 
 public class DayComponent extends JComponent
 {
-	Color DARK_RED = new Color(204,0,0);
-	Color VERY_LIGHT_RED = new Color(255,102,102);
+	private Color DARK_RED = new Color(204,0,0);
+	private Color VERY_LIGHT_RED = new Color(255,102,102);
 	private Color colour = Color.BLACK;
 	private int day;
 	private int month;

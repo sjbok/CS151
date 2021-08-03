@@ -107,13 +107,13 @@ public class CalendarPanel extends JPanel {
 			temp = temp.minusMonths(1);
 		} else if (a.equals("t")) {
 			temp = cal;
+			String check = ViewPanel.checkView;
+			ViewPanel.view(temp, check);
 		}
 		this.remove(calPanel);
 		for (int i = 0; i < days.length; i++) {
 			this.remove(days[i]);
 		}
-		String check = ViewPanel.checkView;
-		ViewPanel.view(temp, check);
 		this.draw(temp);
 		this.revalidate();
 	}
@@ -122,11 +122,84 @@ public class CalendarPanel extends JPanel {
 	{
 		if (a.equals("n"))
 		{
-			
+			LocalDate test = LocalDate.of(Calendar.selectYear, Calendar.selectMonth, Calendar.selectDay);
+			if(Calendar.selectDay == test.getMonth().length(test.isLeapYear()))
+			{
+				changeMonths("n");
+				Calendar.selectDay = 1;
+				Calendar.selectMonth = Calendar.day.get(Calendar.selectDay - 1).getMonth();
+				Calendar.selectYear = Calendar.day.get(Calendar.selectDay - 1).getYear();
+			}
+			else if(test.getMonth().length(test.isLeapYear()) == Calendar.selectDay + 1)
+			{
+				Calendar.selectDay = Calendar.day.get(Calendar.selectDay).getDay();
+				Calendar.selectMonth = Calendar.day.get(Calendar.selectDay - 1).getMonth();
+				Calendar.selectYear = Calendar.day.get(Calendar.selectDay - 1).getYear();			
+			}
+			else
+			{
+				Calendar.selectDay = Calendar.day.get(Calendar.selectDay).getDay();
+				Calendar.selectMonth = Calendar.day.get(Calendar.selectDay).getMonth();
+				Calendar.selectYear = Calendar.day.get(Calendar.selectDay).getYear();
+			}
+			LocalDate ld = LocalDate.of(Calendar.selectYear, Calendar.selectMonth, Calendar.selectDay);			
+			for(int i = 0; i < Calendar.day.size(); i++)
+			{
+				if(Calendar.day.get(i).getDay() == ld.getDayOfMonth())
+				{			
+					Calendar.day.get(i).changeColour();
+					Calendar.day.get(i).repaint();	
+					String check = ViewPanel.checkView;
+					ViewPanel.view(ld, check);
+				}
+				else
+				{
+					Calendar.day.get(i).defaultColour();
+					Calendar.day.get(i).repaint();
+				}
+			}
+			this.revalidate();
 		}
 		else if (a.equals("p"))
 		{
-
+			LocalDate test = LocalDate.of(Calendar.selectYear, Calendar.selectMonth, Calendar.selectDay);
+			if(Calendar.selectDay == 1)
+			{
+				changeMonths("p");
+				test = test.minusMonths(1);
+				Calendar.selectDay = test.getMonth().length(test.isLeapYear());
+				Calendar.selectMonth = Calendar.day.get(Calendar.selectDay - 1).getMonth();
+				Calendar.selectYear = Calendar.day.get(Calendar.selectDay - 1).getYear();
+			}
+			else if(Calendar.selectDay == 2)
+			{
+				Calendar.selectDay = Calendar.day.get(Calendar.selectDay - 2).getDay();
+				Calendar.selectMonth = Calendar.day.get(Calendar.selectDay).getMonth();
+				Calendar.selectYear = Calendar.day.get(Calendar.selectDay).getYear();			
+			}
+			else
+			{
+				Calendar.selectDay = Calendar.day.get(Calendar.selectDay - 2).getDay();
+				Calendar.selectMonth = Calendar.day.get(Calendar.selectDay - 2).getMonth();
+				Calendar.selectYear = Calendar.day.get(Calendar.selectDay - 2).getYear();
+			}
+			LocalDate ld = LocalDate.of(Calendar.selectYear, Calendar.selectMonth, Calendar.selectDay);
+			for(int i = 0; i < Calendar.day.size(); i++)
+			{
+				if(Calendar.day.get(i).getDay() == ld.getDayOfMonth())
+				{			
+					Calendar.day.get(i).changeColour();
+					Calendar.day.get(i).repaint();	
+					String check = ViewPanel.checkView;
+					ViewPanel.view(ld, check);
+				}
+				else
+				{
+					Calendar.day.get(i).defaultColour();
+					Calendar.day.get(i).repaint();
+				}
+			}
+			this.revalidate();
 		}
 	}
 
