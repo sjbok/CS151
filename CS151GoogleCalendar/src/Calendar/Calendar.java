@@ -165,7 +165,7 @@ public class Calendar extends JPanel
 				if(!days[i][j].equals("\t"))
 				{
 					days[i][j] = days[i][j].trim();
-					day.add(new DayComponent(Integer.parseInt(days[i][j]), c.getMonthValue(), c.getYear(), 60, 60)); // 				
+					day.add(new DayComponent(Integer.parseInt(days[i][j]), c.getMonthValue(), c.getYear(), 60, 60));  				
 					calPanel[i+1].add(day.get(index));	
 					DayComponent dayc = day.get(index);
 					day.get(index).addMouseListener(new MouseAdapter() {
@@ -179,6 +179,9 @@ public class Calendar extends JPanel
 									selectDay = day.get(i).getDay();
 									selectMonth = day.get(i).getMonth();
 									selectYear = day.get(i).getYear();
+									LocalDate ld = LocalDate.of(selectYear, selectMonth, selectDay);
+									String check = ViewPanel.checkView;
+									ViewPanel.view(ld, check);
 								}
 								else
 								{

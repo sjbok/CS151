@@ -1,4 +1,3 @@
-
 package Calendar;
 
 import javax.swing.*;
@@ -65,32 +64,34 @@ public class EventPanel extends JPanel implements ItemListener{
         times.add(start);
         times.add(new JLabel("End:"));
         times.add(end);
-      
+
         save = new JButton("Save");
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TimeInterval ti = new TimeInterval(start.getSelectedItem().toString(), end.getSelectedItem().toString());
                 LocalDate ld = LocalDate.of(Integer.parseInt(years.getText()), Integer.parseInt(monthBox.getSelectedItem().toString()),
-                		Integer.parseInt(dayBox.getSelectedItem().toString()));
+                        Integer.parseInt(dayBox.getSelectedItem().toString()));
                 if(!title.getText().isBlank())
-                {               	
-                	create = new Event(title.getText(), ti, ld);
-                	Boolean pass = CalendarEvents.add(create);
-                	if(pass)
-                	{
-                		JOptionPane.showMessageDialog(null, "Event saved.");
-                    	CalendarPanel.frame.setVisible(false);
-                	}
-                	else
-                	{
-                		JOptionPane.showMessageDialog(null, "Error: Time conflict.");
-                	}                	                
+                {
+                    create = new Event(title.getText(), ti, ld);
+                    Boolean pass = CalendarEvents.add(create);
+                    if(pass)
+                    {
+                        JOptionPane.showMessageDialog(null, "Event saved.");
+                        CalendarPanel.frame.setVisible(false);
+                        String check = ViewPanel.checkView;
+                        ViewPanel.view(ld, check);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Error: Time conflict.");
+                    }
                 }
                 else
                 {
-                	JOptionPane.showMessageDialog(null, "Please enter a title for the event.");
-                }                
+                    JOptionPane.showMessageDialog(null, "Please enter a title for the event.");
+                }
             }
         });
 

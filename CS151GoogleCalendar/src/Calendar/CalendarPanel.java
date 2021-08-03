@@ -16,14 +16,11 @@ public class CalendarPanel extends JPanel {
 	private JPanel createPanel;
 	private JPanel calPanel;
 	private JPanel[] days;
-	private CalendarEvents events;
 	public static JFrame frame;
 
 	public CalendarPanel(CalendarEvents e) {
 		int width = 360;
 		int height = 450;
-
-		events = e;
 
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setPreferredSize(new Dimension(width, height));
@@ -46,10 +43,10 @@ public class CalendarPanel extends JPanel {
 		today.addActionListener(event ->
 				changeMonths("t"));
 		nextButton.addActionListener(event ->
-			changeDays("n"));
+				changeDays("n"));
 		prevButton.addActionListener(event ->
-			changeDays("p"));
-		
+				changeDays("p"));
+
 
 		JButton create = new JButton("CREATE");
 		create.setForeground(Color.white);
@@ -87,7 +84,7 @@ public class CalendarPanel extends JPanel {
 		prevMonth.addActionListener(event ->
 				changeMonths("p"));
 
-		JLabel label = new JLabel(cal.getMonth() + " " + cal.getYear()); // Printing this month and this year		
+		JLabel label = new JLabel(cal.getMonth() + " " + cal.getYear()); // Printing this month and this year
 		label.setFont(new Font("Arial", Font.BOLD, 20));
 
 		calPanel.add(Box.createRigidArea(new Dimension(20, 0)));
@@ -115,17 +112,19 @@ public class CalendarPanel extends JPanel {
 		for (int i = 0; i < days.length; i++) {
 			this.remove(days[i]);
 		}
+		String check = ViewPanel.checkView;
+		ViewPanel.view(temp, check);
 		this.draw(temp);
 		this.revalidate();
 	}
-	
+
 	public void changeDays(String a)
 	{
-		if (a.equals("n")) 
+		if (a.equals("n"))
 		{
 			
 		}
-		else if (a.equals("p")) 
+		else if (a.equals("p"))
 		{
 			
 		}
