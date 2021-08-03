@@ -126,7 +126,7 @@ public class CalendarPanel extends JPanel {
 		}
 		else if (a.equals("p"))
 		{
-			
+
 		}
 	}
 

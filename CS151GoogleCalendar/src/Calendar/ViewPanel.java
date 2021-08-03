@@ -72,6 +72,7 @@ public class ViewPanel extends JPanel
 		        int year = Calendar.selectYear;
 		        LocalDate ld = LocalDate.of(year, month, day);
 		        checkView = "w";
+		        view(ld, checkView);
 			}
 		});
 		
@@ -83,6 +84,7 @@ public class ViewPanel extends JPanel
 		        int year = Calendar.selectYear;
 		        LocalDate ld = LocalDate.of(year, month, day);
 		        checkView = "m";
+				view(ld, checkView);
 			}
 		});
 		

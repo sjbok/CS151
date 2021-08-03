@@ -103,6 +103,5 @@ public class CalendarEvents {
 			text = "No current events on " + date;
 			return text;
 		}
-		
 	}
 }
