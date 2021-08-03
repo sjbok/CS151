@@ -1,4 +1,3 @@
-
 package Calendar;
 
 import javax.swing.*;
@@ -23,9 +22,8 @@ public class EventPanel extends JPanel implements ItemListener{
     private JButton save;
     private String[] time = {"00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00",
             "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00" , "22:00", "23:00"};
-    private CalendarEvents calendarEvents;
 
-    public EventPanel(CalendarEvents ce){
+    public EventPanel(){
         this.setPreferredSize(new Dimension(300,300));
 
         LocalTime ld = LocalTime.now();
@@ -72,15 +70,33 @@ public class EventPanel extends JPanel implements ItemListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 TimeInterval ti = new TimeInterval(start.getSelectedItem().toString(), end.getSelectedItem().toString());
-                LocalDate ld = LocalDate.of(Integer.parseInt(years.getText()), Integer.parseInt(monthBox.getSelectedItem().toString()), Integer.parseInt(dayBox.getSelectedItem().toString()));
-                create = new Event(title.getText(), ti, ld);
-                ce.add(create);
+                LocalDate ld = LocalDate.of(Integer.parseInt(years.getText()), Integer.parseInt(monthBox.getSelectedItem().toString()),
+                        Integer.parseInt(dayBox.getSelectedItem().toString()));
+                if(!title.getText().isBlank())
+                {
+                    create = new Event(title.getText(), ti, ld);
+                    Boolean pass = CalendarEvents.add(create);
+                    if(pass)
+                    {
+                        JOptionPane.showMessageDialog(null, "Event saved.");
+                        CalendarPanel.frame.setVisible(false);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Error: Time conflict.");
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter a title for the event.");
+                }
             }
         });
 
         this.add(new JLabel("Date (YYYY/MM/DD):"));
         this.add(date);
         this.add(times);
+        this.add(Box.createRigidArea(new Dimension(500, 0)));
         this.add(save);
     }
 

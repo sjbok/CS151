@@ -20,6 +20,18 @@ public class TimeInterval {
 
 		start = LocalTime.parse(s);
 		end = LocalTime.parse(e);
+		this.start = start;
+		this.end = end;
+	}
+	
+	public LocalTime getst()
+	{
+		return start;
+	}
+	
+	public LocalTime getet()
+	{
+		return end;
 	}
 
 	/**

@@ -48,6 +48,13 @@ public class ViewPanel extends JPanel
 		buttonPanel.add(month);
 		buttonPanel.add(agenda);
 		filePanel.add(fromfile);
+
+		day.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				viewByDay();
+			}
+		});
 		
 		this.add(filePanel);
 		this.add(Box.createRigidArea(new Dimension(0, 20)));
@@ -57,7 +64,7 @@ public class ViewPanel extends JPanel
 
 
 	public void viewByDay(LocalDate t){
-		// add functionality to viewByDay
+		viewArea.setText(calendarEvents.getEvents(t));
 	}
 
 	/**

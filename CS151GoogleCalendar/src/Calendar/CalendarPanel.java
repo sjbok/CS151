@@ -16,10 +16,9 @@ public class CalendarPanel extends JPanel {
 	private JPanel createPanel;
 	private JPanel calPanel;
 	private JPanel[] days;
-	private CalendarEvents calendarEvents;
+	public static JFrame frame;
 
 	public CalendarPanel(CalendarEvents e) {
-		calendarEvents = e;
 		int width = 360;
 		int height = 450;
 
@@ -39,10 +38,15 @@ public class CalendarPanel extends JPanel {
 
 		JButton today = new JButton("Today");
 		JButton nextButton = new JButton(">");
-		JButton previousButton = new JButton("<");
+		JButton prevButton = new JButton("<");
 
 		today.addActionListener(event ->
 				changeMonths("t"));
+		nextButton.addActionListener(event ->
+				changeDays("n"));
+		prevButton.addActionListener(event ->
+				changeDays("p"));
+
 
 		JButton create = new JButton("CREATE");
 		create.setForeground(Color.white);
@@ -54,7 +58,7 @@ public class CalendarPanel extends JPanel {
 		buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
 		buttonPanel.add(today);
 		buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
-		buttonPanel.add(previousButton);
+		buttonPanel.add(prevButton);
 		buttonPanel.add(nextButton);
 		createPanel.add(Box.createRigidArea(new Dimension(20, 0)));
 		createPanel.add(create);
@@ -80,7 +84,7 @@ public class CalendarPanel extends JPanel {
 		prevMonth.addActionListener(event ->
 				changeMonths("p"));
 
-		JLabel label = new JLabel(cal.getMonth() + " " + cal.getYear()); // Printing this month and this year		
+		JLabel label = new JLabel(cal.getMonth() + " " + cal.getYear()); // Printing this month and this year
 		label.setFont(new Font("Arial", Font.BOLD, 20));
 
 		calPanel.add(Box.createRigidArea(new Dimension(20, 0)));
@@ -112,13 +116,25 @@ public class CalendarPanel extends JPanel {
 		this.revalidate();
 	}
 
+	public void changeDays(String a)
+	{
+		if (a.equals("n"))
+		{
+
+		}
+		else if (a.equals("p"))
+		{
+
+		}
+	}
+
 	public void createEvent() {
-		EventPanel ep = new EventPanel(calendarEvents);
-		JFrame frame = new JFrame("Create Event");
+		EventPanel ep = new EventPanel();
+		frame = new JFrame("Create Event");
 		frame.setResizable(false);
-		frame.getContentPane().add (ep);
+		frame.getContentPane().add(ep);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		frame.setVisible (true);
+		frame.setVisible(true);
 	}
 }
