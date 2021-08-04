@@ -80,19 +80,37 @@ public class CalendarEvents {
 	}
 
 	/**
-	 * Gets all events on a specic date
+	 * Gets all events on a specific date
 	 * @param ld
 	 */
 
 	public String getEvents(LocalDate ld)
 	{
+<<<<<<< HEAD
 		String text = new String("");
 
 		if (hash.containsKey(ld)) {
 			for(Event e: hash.get(ld)){
 				text = text + e.toString() + "\n";
 			}
+=======
+		String month = ld.getMonth().toString();
+		month = month.substring(0,1).toUpperCase() + month.substring(1).toLowerCase();
+		String date = month + " " + ld.getDayOfMonth() + ", " + ld.getYear();
+		String text = "";
+		if (hash.containsKey(ld)) // Checking if hash already has events on that date
+		{
+			for(Event e: hash.get(ld)){
+				text += e.toString() + "\n";
+			}
+			String out = "Events on " + date + ":\n" + text;
+			return out;
 		}
-		return text;
+		else
+		{		
+			text = "No current events on " + date;
+			return text;
+>>>>>>> cde478d0be73316894e3dac7afcd57e7f0638aff
+		}
 	}
 }

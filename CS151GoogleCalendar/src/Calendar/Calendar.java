@@ -7,20 +7,23 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import javax.swing.*;
 
 public class Calendar extends JPanel
 {	
+<<<<<<< HEAD
 	private ArrayList<DayComponent> day = new ArrayList<DayComponent>();
 	public static LocalDate selectDate = LocalDate.now();
+=======
+	public static ArrayList<DayComponent> day = new ArrayList<DayComponent>();
+>>>>>>> cde478d0be73316894e3dac7afcd57e7f0638aff
 	public static int selectDay;
 	public static int selectMonth;
 	public static int selectYear;
 	
 	public JPanel[] printCalendar(LocalDate c)
 	{  
+		day.removeAll(day);
 		JPanel calPanel[] = new JPanel[7];
 		for(int i = 0; i < calPanel.length; i++)
 		{
@@ -129,25 +132,6 @@ public class Calendar extends JPanel
 				}
 			}			
 		}
-
-		int row = 0; // Variable to hold the week of today's date
-		int today = c.getDayOfMonth(); // Today's date
-		LocalDate z = LocalDate.of(c.getYear(), c.getMonth(), today);
-		int e = z.getDayOfWeek().getValue(); // Today's day of week value
-		if(e == 7) // Changing Sunday value from 7 to 0
-		{
-			e = 0;
-		}
-
-		for(int i = 0; i < end.length; i++)
-		{
-			if(today <= end[i]) // Using array end[] to determine which week today falls in
-			{
-				row = i;
-				break;
-			}
-		}
-		days[row][e] = today + "\t";; // Adding brackets to today's date in the array
 		
 		calPanel[0].add(Box.createRigidArea(new Dimension(25, 0)));
 		for(int i = 0; i < week1.length; i++)
@@ -166,7 +150,7 @@ public class Calendar extends JPanel
 				if(!days[i][j].equals("\t"))
 				{
 					days[i][j] = days[i][j].trim();
-					day.add(new DayComponent(Integer.parseInt(days[i][j]), c.getMonthValue(), c.getYear(), 60, 60)); // 				
+					day.add(new DayComponent(Integer.parseInt(days[i][j]), c.getMonthValue(), c.getYear(), 60, 60));  		
 					calPanel[i+1].add(day.get(index));	
 					DayComponent dayc = day.get(index);
 					day.get(index).addMouseListener(new MouseAdapter() {
@@ -174,13 +158,19 @@ public class Calendar extends JPanel
 							for(int i = 0; i < day.size(); i++)
 							{
 								if(day.get(i).getDay() == dayc.getDay())
-								{
+								{			
 									day.get(i).changeColour();
 									day.get(i).repaint();
 									selectDay = day.get(i).getDay();
 									selectMonth = day.get(i).getMonth();
 									selectYear = day.get(i).getYear();
+<<<<<<< HEAD
 									selectDate = LocalDate.of(selectYear, selectMonth, selectDay);
+=======
+									LocalDate ld = LocalDate.of(selectYear, selectMonth, selectDay);								
+									String check = ViewPanel.checkView;
+									ViewPanel.view(ld, check);
+>>>>>>> cde478d0be73316894e3dac7afcd57e7f0638aff
 								}
 								else
 								{

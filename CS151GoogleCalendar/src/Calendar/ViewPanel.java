@@ -17,8 +17,14 @@ import javax.swing.JTextArea;
 
 public class ViewPanel extends JPanel
 {
+<<<<<<< HEAD
 	private JTextArea viewArea;
 	private CalendarEvents calendarEvents;
+=======
+	private static JTextArea viewArea;
+	private static CalendarEvents calendarEvents;
+	public static String checkView = "d"; // default day view
+>>>>>>> cde478d0be73316894e3dac7afcd57e7f0638aff
 	
 	public ViewPanel(CalendarEvents e)
 	{
@@ -30,6 +36,8 @@ public class ViewPanel extends JPanel
 		
 		viewArea = new JTextArea();
 		viewArea.setEditable(false);
+		LocalDate ld = LocalDate.now();
+		view(ld, checkView);
 		
 		JButton day = new JButton("Day");		
 		JButton week = new JButton("Week");
@@ -52,7 +60,40 @@ public class ViewPanel extends JPanel
 		day.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int day = Calendar.selectDay;
+		        int month = Calendar.selectMonth;
+		        int year = Calendar.selectYear;
+		        LocalDate ld = LocalDate.of(year, month, day);
+		        checkView = "d";
+				view(ld, checkView);			
+			}
+		});
+		
+		week.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int day = Calendar.selectDay;
+		        int month = Calendar.selectMonth;
+		        int year = Calendar.selectYear;
+		        LocalDate ld = LocalDate.of(year, month, day);
+		        checkView = "w";
+		        view(ld, checkView);
+			}
+		});
+		
+		month.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 				viewByDay(Calendar.selectDate);
+=======
+				int day = Calendar.selectDay;
+		        int month = Calendar.selectMonth;
+		        int year = Calendar.selectYear;
+		        LocalDate ld = LocalDate.of(year, month, day);
+		        checkView = "m";
+				view(ld, checkView);
+>>>>>>> cde478d0be73316894e3dac7afcd57e7f0638aff
 			}
 		});
 		
@@ -62,11 +103,28 @@ public class ViewPanel extends JPanel
 		this.add(viewArea);		
 	}
 
+<<<<<<< HEAD
 
 	public void viewByDay(LocalDate t){
 		String str = calendarEvents.getEvents(t);
 		viewArea.setText(str);
 
+=======
+
+	public static void view(LocalDate t, String check){ // Make this view method use all different views
+		if(check.equals("d"))
+		{
+			viewArea.setText(calendarEvents.getEvents(t));
+		}
+		else if(check.equals("w"))
+		{
+			
+		}
+		else if(check.equals("m"))
+		{
+			
+		}
+>>>>>>> cde478d0be73316894e3dac7afcd57e7f0638aff
 	}
 
 	/**
@@ -75,9 +133,9 @@ public class ViewPanel extends JPanel
 	 * @param d day
 	 * @param y year
 	 */
-
-	public void viewByWeek(Month m, int d, int y){
-		//add functionality to viewByWeek
-	}
+//
+//	public void viewByWeek(Month m, int d, int y){
+//		//add functionality to viewByWeek
+//	}
 
 }

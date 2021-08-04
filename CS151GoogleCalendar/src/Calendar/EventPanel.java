@@ -80,6 +80,8 @@ public class EventPanel extends JPanel implements ItemListener{
                     {
                         JOptionPane.showMessageDialog(null, "Event saved.");
                         CalendarPanel.frame.setVisible(false);
+                        String check = ViewPanel.checkView;
+                        ViewPanel.view(ld, check);
                     }
                     else
                     {
