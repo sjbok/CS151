@@ -18,10 +18,8 @@ public class TimeInterval {
 		s.replace(":", "");
 		e.replace(":", "");
 
-		start = LocalTime.parse(s);
-		end = LocalTime.parse(e);
-		this.start = start;
-		this.end = end;
+		this.start = LocalTime.parse(s);
+		this.end = LocalTime.parse(e);
 	}
 	
 	public LocalTime getst()
