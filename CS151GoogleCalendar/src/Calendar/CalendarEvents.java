@@ -86,9 +86,12 @@ public class CalendarEvents {
 
 	public String getEvents(LocalDate ld)
 	{
-		String text;
-		for(Event e: hash.get(ld)){
-			text += e.toString() + "\n";
+		String text = new String("");
+
+		if (hash.containsKey(ld)) {
+			for(Event e: hash.get(ld)){
+				text = text + e.toString() + "\n";
+			}
 		}
 		return text;
 	}

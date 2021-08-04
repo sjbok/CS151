@@ -17,7 +17,7 @@ import javax.swing.JTextArea;
 
 public class ViewPanel extends JPanel
 {
-	private final JTextArea viewArea;
+	private JTextArea viewArea;
 	private CalendarEvents calendarEvents;
 	
 	public ViewPanel(CalendarEvents e)
@@ -52,7 +52,7 @@ public class ViewPanel extends JPanel
 		day.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				viewByDay();
+				viewByDay(Calendar.selectDate);
 			}
 		});
 		
@@ -64,7 +64,9 @@ public class ViewPanel extends JPanel
 
 
 	public void viewByDay(LocalDate t){
-		viewArea.setText(calendarEvents.getEvents(t));
+		String str = calendarEvents.getEvents(t);
+		viewArea.setText(str);
+
 	}
 
 	/**

@@ -137,4 +137,8 @@ public class CalendarPanel extends JPanel {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
+
+	public LocalDate getSelectedDate(Calendar c){
+		return c.getSelectDate();
+	}
 }
