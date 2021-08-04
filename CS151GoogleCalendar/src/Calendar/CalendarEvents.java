@@ -1,9 +1,11 @@
 
 package Calendar;
 
+import java.awt.Font;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class CalendarEvents {
@@ -84,24 +86,93 @@ public class CalendarEvents {
 	 * @param ld
 	 */
 
-	public String getEvents(LocalDate ld)
+	public String getEvents(LocalDate ld, String check)
 	{
-		String month = ld.getMonth().toString();
-		month = month.substring(0,1).toUpperCase() + month.substring(1).toLowerCase();
-		String date = month + " " + ld.getDayOfMonth() + ", " + ld.getYear();
+		ViewPanel.viewArea.setFont(new Font("Arial", Font.PLAIN, 12));
 		String text = "";
-		if (hash.containsKey(ld)) // Checking if hash already has events on that date
+		if(check.equals("d"))
 		{
-			for(Event e: hash.get(ld)){
-				text += e.toString() + "\n";
+			String month = ld.getMonth().toString();
+			month = month.substring(0,1).toUpperCase() + month.substring(1).toLowerCase();
+			String date = month + " " + ld.getDayOfMonth() + ", " + ld.getYear();		
+			if (hash.containsKey(ld)) // Checking if hash already has events on that date
+			{
+				ArrayList<Event> test = hash.get(ld); // Declare new event list containing all events from HashMap on that day
+				Collections.sort(test, new SortTime()); // Sorts all events by time
+				for(Event e: hash.get(ld)){
+					text += e.toString() + "\n";
+				}
+				String out = "Events on " + date + ":\n" + text;
+				return out;
 			}
-			String out = "Events on " + date + ":\n" + text;
+			else
+			{		
+				text = "No current events on " + date;
+				return text;
+			}
+		}
+		else if(check.equals("w"))
+		{			
+			ViewPanel.viewArea.setFont(new Font("Arial", Font.PLAIN, 12));
+			String day = "";
+			if(!ld.getDayOfWeek().toString().equals("SUNDAY"))
+			{
+				while(!ld.getDayOfWeek().toString().equals("SUNDAY"))
+				{
+					ld = ld.plusDays(1);
+					day = ld.getDayOfWeek().toString();				
+				}			
+				ld = ld.minusWeeks(1);
+			}
+			String out = "";
+			for(int i = 0; i < 7; i++)
+			{
+				text = "";
+				day = ld.getDayOfWeek().toString();
+				day = day.substring(0, 3);
+				out = out + day + " " + ld.getDayOfMonth() + "\n";			
+				if (hash.containsKey(ld)) // Checking if hash already has events on that date
+				{
+					ArrayList<Event> test = hash.get(ld); // Declare new event list containing all events from HashMap on that day
+					Collections.sort(test, new SortTime()); // Sorts all events by time
+					for(Event e: hash.get(ld)){
+						text += e.toString() + "\n";
+					}
+					out = out + text + "________________________________________________________________________\n";
+				}
+				else
+				{		
+					text = "No current events";
+					out = out + text + "\n\n________________________________________________________________________\n";
+				}
+				ld = ld.plusDays(1);
+			}
 			return out;
 		}
-		else
-		{		
-			text = "No current events on " + date;
-			return text;
+		else if(check.equals("m"))
+		{
+			ViewPanel.viewArea.setFont(new Font("Arial", Font.PLAIN, 10));
+			String day = "";
+			if(!ld.getDayOfWeek().toString().equals("SUNDAY"))
+			{
+				while(!ld.getDayOfWeek().toString().equals("SUNDAY"))
+				{
+					ld = ld.plusDays(1);
+					day = ld.getDayOfWeek().toString();				
+				}			
+				ld = ld.minusWeeks(1);
+			}
+			String out = "";
+			for(int i = 0; i < 35; i++)
+			{
+				text = "";
+				day = ld.getDayOfWeek().toString();
+				day = day.substring(0, 3);
+				out = out + day + " " + ld.getDayOfMonth() + "\n";
+				ld = ld.plusDays(1);
+			}
+			return out;
 		}
+		return text;
 	}
 }

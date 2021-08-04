@@ -2,13 +2,13 @@ package Calendar;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,7 +17,7 @@ import javax.swing.JTextArea;
 
 public class ViewPanel extends JPanel
 {
-	private static JTextArea viewArea;
+	public static JTextArea viewArea;
 	private static CalendarEvents calendarEvents;
 	public static String checkView = "d"; // default day view
 	
@@ -91,23 +91,12 @@ public class ViewPanel extends JPanel
 		this.add(filePanel);
 		this.add(Box.createRigidArea(new Dimension(0, 20)));
 		this.add(buttonPanel);
-		this.add(viewArea);		
+		this.add(viewArea);	
 	}
 
 
-	public static void view(LocalDate t, String check){ // Make this view method use all different views
-		if(check.equals("d"))
-		{
-			viewArea.setText(calendarEvents.getEvents(t));
-		}
-		else if(check.equals("w"))
-		{
-			
-		}
-		else if(check.equals("m"))
-		{
-			
-		}
+	public static void view(LocalDate t, String check) { // Make this view method use all different views
+		viewArea.setText(calendarEvents.getEvents(t, check));
 	}
 
 	/**

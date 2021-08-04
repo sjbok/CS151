@@ -22,7 +22,7 @@ public class Event {
 	}
 
 	public String toString() {
-		return name + " : " + ti.getTime();
+		return name + ":\t\t" + ti.getTime();
 	}
 
 	public LocalDate getDate() {
