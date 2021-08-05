@@ -119,10 +119,8 @@ public class CalendarEvents {
 			{
 				while(!ld.getDayOfWeek().toString().equals("SUNDAY"))
 				{
-					ld = ld.plusDays(1);
-					day = ld.getDayOfWeek().toString();				
+					ld = ld.minusDays(1);		
 				}			
-				ld = ld.minusWeeks(1);
 			}
 			String out = "";
 			for(int i = 0; i < 7; i++)
@@ -153,24 +151,58 @@ public class CalendarEvents {
 		{
 			ViewPanel.viewArea.setFont(new Font("Arial", Font.PLAIN, 10));
 			String day = "";
-			if(!ld.getDayOfWeek().toString().equals("SUNDAY"))
+			int currentMonth = ld.getMonthValue();
+			int monthCheck = ld.getMonthValue();
+			LocalDate ld2 = LocalDate.of(ld.getYear(), ld.getMonthValue(), 1);
+			if(!ld2.getDayOfWeek().toString().equals("SUNDAY"))
 			{
-				while(!ld.getDayOfWeek().toString().equals("SUNDAY"))
+				while(!ld2.getDayOfWeek().toString().equals("SUNDAY"))
 				{
-					ld = ld.plusDays(1);
-					day = ld.getDayOfWeek().toString();				
+					ld2 = ld2.minusDays(1);				
 				}			
-				ld = ld.minusWeeks(1);
 			}
 			String out = "";
-			for(int i = 0; i < 35; i++)
+			outerloop:
+			for(int j = 0; j < 6; j++)
 			{
-				text = "";
-				day = ld.getDayOfWeek().toString();
-				day = day.substring(0, 3);
-				out = out + day + " " + ld.getDayOfMonth() + "\n";
-				ld = ld.plusDays(1);
-			}
+				if(j == 5)
+				{
+					monthCheck = ld2.getMonthValue();
+				}
+				if(currentMonth != monthCheck)
+				{
+					break outerloop;
+				}
+				for(int i = 0; i < 7; i++)
+				{
+					text = "";
+					day = ld2.getDayOfWeek().toString();
+					day = day.substring(0, 3);
+					out = out + day + " " + ld2.getDayOfMonth() + "\t";
+					ld2 = ld2.plusDays(1);
+				}				
+				out = out + "\n\n";
+				for(int i = 0; i < 7; i++)
+				{
+					if(hash.containsKey(ld2.minusDays(7 - i)))
+					{
+						if(hash.get(ld2.minusDays(7 - i)).size() == 1)
+						{
+							text = hash.get(ld2.minusDays(7 - i)).size() + " Event\t";
+						}
+						else
+						{
+							text = hash.get(ld2.minusDays(7 - i)).size() + " Events\t";
+						}
+					}
+					else
+					{
+						text = "\t";
+					}
+					out = out + text;
+				}			
+				out = out + "\n\n\n\n\n";
+			}		
 			return out;
 		}
 		return text;

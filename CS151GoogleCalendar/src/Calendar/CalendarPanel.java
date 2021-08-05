@@ -192,7 +192,28 @@ public class CalendarPanel extends JPanel {
 			}
 			else if(ViewPanel.checkView.equals("m"))
 			{
-				
+				LocalDate test = LocalDate.of(Calendar.selectYear, Calendar.selectMonth, 1);
+				LocalDate test2 = test.plusMonths(1);
+				changeMonths("n");
+				Calendar.selectYear = test2.getYear();
+				Calendar.selectMonth = test2.getMonthValue();
+				Calendar.selectDay = test2.getDayOfMonth();
+				LocalDate ld = test2;			
+				for(int i = 0; i < Calendar.day.size(); i++)
+				{
+					if(Calendar.day.get(i).getDay() == ld.getDayOfMonth())
+					{			
+						Calendar.day.get(i).changeColour();
+						Calendar.day.get(i).repaint();	
+						String check = ViewPanel.checkView;
+						ViewPanel.view(ld, check);
+					}
+					else
+					{
+						Calendar.day.get(i).defaultColour();
+						Calendar.day.get(i).repaint();
+					}
+				}
 			}
 			this.revalidate();
 		}
@@ -271,7 +292,28 @@ public class CalendarPanel extends JPanel {
 			}
 			else if(ViewPanel.checkView.equals("m"))
 			{
-				
+				LocalDate test = LocalDate.of(Calendar.selectYear, Calendar.selectMonth, 1);
+				LocalDate test2 = test.minusMonths(1);				
+				changeMonths("p");
+				Calendar.selectYear = test2.getYear();
+				Calendar.selectMonth = test2.getMonthValue();
+				Calendar.selectDay = test2.getDayOfMonth();
+				LocalDate ld = test2;			
+				for(int i = 0; i < Calendar.day.size(); i++)
+				{
+					if(Calendar.day.get(i).getDay() == ld.getDayOfMonth())
+					{			
+						Calendar.day.get(i).changeColour();
+						Calendar.day.get(i).repaint();	
+						String check = ViewPanel.checkView;
+						ViewPanel.view(ld, check);
+					}
+					else
+					{
+						Calendar.day.get(i).defaultColour();
+						Calendar.day.get(i).repaint();
+					}
+				}
 			}			
 			this.revalidate();
 		}

@@ -38,5 +38,15 @@ public class TimeInterval {
 	public String getTime(){
 		return start.toString() + " - " + end.toString();
 	}
+	
+	public String getTime2() {
+		String a = start.toString();
+		String[] a1 = a.split(":");
+		
+		String b = end.toString();
+		String[] b1 = b.split(":");
+		
+		return a1[0] + " - " + b1[0];
+	}
 
 }
