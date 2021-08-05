@@ -21,10 +21,14 @@ public class TimeInterval {
 		this.start = LocalTime.parse(s);
 		this.end = LocalTime.parse(e);
 	}
-
-	TimeInterval(){
+	
+	TimeInterval(int s, int e){
 		//for recurring events
+		this.start=LocalTime.of(s, 0);
+		this.end=LocalTime.of(e, 0);
 	}
+
+	
 
 	public void setStart(String s){
 		this.start = LocalTime.parse(s);
@@ -49,16 +53,6 @@ public class TimeInterval {
 	 */
 	public String getTime(){
 		return start.toString() + " - " + end.toString();
-	}
-	
-	public String getTime2() {
-		String a = start.toString();
-		String[] a1 = a.split(":");
-		
-		String b = end.toString();
-		String[] b1 = b.split(":");
-		
-		return a1[0] + " - " + b1[0];
 	}
 
 }

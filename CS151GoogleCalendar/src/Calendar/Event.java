@@ -12,9 +12,6 @@ public class Event {
 		this.ti = ti;
 		this.ld = ld;
 	}
-	public Event(){
-		//for recurring events
-	}
 
 	public String getName() {
 		return name;
@@ -26,20 +23,6 @@ public class Event {
 
 	public String toString() {
 		return name + ":\t\t" + ti.getTime();
-	}
-	
-	public String MonthtoString(int count) {
-		String out = name + ": ";
-		if(name.length() > 13)
-		{
-			out = name.substring(0, 13) + "-\n";
-			for(int i = 0; i < count; i++)
-			{
-				out = out + "\t";
-			}
-			out = out + name.substring(13, name.length()) + ": ";
-		}
-		return out + ti.getTime2();
 	}
 
 	public String agendaString(){ return ld.toString() + " " + name; }
