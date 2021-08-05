@@ -11,6 +11,7 @@ import javax.swing.*;
 
 public class Calendar extends JPanel
 {	
+	public static LocalDate selectDate = LocalDate.now();
 	public static ArrayList<DayComponent> day = new ArrayList<DayComponent>();
 	public static int selectDay;
 	public static int selectMonth;
@@ -159,9 +160,12 @@ public class Calendar extends JPanel
 									selectDay = day.get(i).getDay();
 									selectMonth = day.get(i).getMonth();
 									selectYear = day.get(i).getYear();
+									selectDate = LocalDate.of(selectYear, selectMonth, selectDay);
+
 									LocalDate ld = LocalDate.of(selectYear, selectMonth, selectDay);								
 									String check = ViewPanel.checkView;
 									ViewPanel.view(ld, check);
+
 								}
 								else
 								{
@@ -184,5 +188,9 @@ public class Calendar extends JPanel
 		selectMonth = LocalDate.now().getMonthValue();
 		selectYear = LocalDate.now().getYear();
 		return calPanel;
+	}
+
+	public LocalDate getSelectDate(){
+		return selectDate;
 	}
 }

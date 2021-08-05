@@ -105,8 +105,11 @@ public class CalendarPanel extends JPanel {
 			temp = temp.minusMonths(1);
 		} else if (a.equals("t")) {
 			temp = cal;
-			String check = ViewPanel.checkView;
-			ViewPanel.view(temp, check);
+			if(!ViewPanel.checkView.equals("a"))
+			{
+				String check = ViewPanel.checkView;
+				ViewPanel.view(temp, check);
+			}			
 		}
 		this.remove(calPanel);
 		for (int i = 0; i < days.length; i++) {
@@ -328,4 +331,5 @@ public class CalendarPanel extends JPanel {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
+
 }

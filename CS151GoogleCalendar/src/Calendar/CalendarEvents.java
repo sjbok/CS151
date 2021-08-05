@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 public class CalendarEvents {
 	public static HashMap<LocalDate, ArrayList<Event>> hash;
+	public static String text = "";
 
 	/**
 	 * A class that contains all events for the calendar
@@ -128,7 +129,7 @@ public class CalendarEvents {
 				text = "";
 				day = ld.getDayOfWeek().toString();
 				day = day.substring(0, 3);
-				out = out + day + " " + ld.getDayOfMonth() + "\n";			
+				out = out + day + " " + ld.getDayOfMonth() + "\n\n";			
 				if (hash.containsKey(ld)) // Checking if hash already has events on that date
 				{
 					ArrayList<Event> test = hash.get(ld); // Declare new event list containing all events from HashMap on that day
@@ -205,6 +206,24 @@ public class CalendarEvents {
 			}		
 			return out;
 		}
+		return text;
+	}
+	
+	public String viewAgenda(LocalDate sd, LocalDate ed){
+		ViewPanel.viewArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		if(!sd.isAfter(ed)) {
+			if(hash.containsKey(sd)) {
+				for (Event e : hash.get(sd)) {
+					text += e.agendaString();
+					text += "\n";
+				}
+			}
+			viewAgenda(sd.plusDays(1), ed);
+		}
+		if(text.equals(""))
+			text = "No events during this range.";
+
+
 		return text;
 	}
 }

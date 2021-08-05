@@ -12,6 +12,9 @@ public class Event {
 		this.ti = ti;
 		this.ld = ld;
 	}
+	public Event(){
+		//for recurring events
+	}
 
 	public String getName() {
 		return name;
@@ -39,8 +42,11 @@ public class Event {
 		return out + ti.getTime2();
 	}
 
+	public String agendaString(){ return ld.toString() + " " + name; }
+
 	public LocalDate getDate() {
 		return ld;
 	}
+
 
 }
