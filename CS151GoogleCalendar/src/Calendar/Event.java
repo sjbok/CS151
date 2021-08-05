@@ -12,6 +12,9 @@ public class Event {
 		this.ti = ti;
 		this.ld = ld;
 	}
+	public Event(){
+		//for recurring events
+	}
 
 	public String getName() {
 		return name;
@@ -30,5 +33,6 @@ public class Event {
 	public LocalDate getDate() {
 		return ld;
 	}
+
 
 }

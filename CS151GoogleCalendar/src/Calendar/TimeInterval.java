@@ -21,6 +21,18 @@ public class TimeInterval {
 		this.start = LocalTime.parse(s);
 		this.end = LocalTime.parse(e);
 	}
+
+	TimeInterval(){
+		//for recurring events
+	}
+
+	public void setStart(String s){
+		this.start = LocalTime.parse(s);
+	}
+
+	public void setEnd(String e){
+		this.end = LocalTime.parse(e);
+	}
 	
 	public LocalTime getst()
 	{

@@ -3,8 +3,13 @@ package Calendar;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 import javax.swing.*;
 
 public class ViewPanel extends JPanel
@@ -140,6 +145,45 @@ public class ViewPanel extends JPanel
 				frame.pack();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
+			}
+		});
+
+		fromfile.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame = new JFrame("From File...");
+				JPanel panel = new JPanel();
+				String[] files = {"notafile.txt", "CS151GoogleCalendar/input.txt","notafile2.txt"};
+				JComboBox select = new JComboBox(files);
+
+				panel.add(select);
+				select.addItemListener(new ItemListener() {
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						File file = new File(select.getSelectedItem().toString());
+						try{
+							Scanner reader = new Scanner(file);
+							while(reader.hasNextLine()){
+								reader.useDelimiter(";");
+								Event event = new Event();
+								TimeInterval ti = new TimeInterval();
+
+								reader.nextLine();
+								frame.setVisible(false);
+							}
+						}
+						catch(FileNotFoundException exception){
+							JOptionPane.showMessageDialog(null, "File not found.");
+						}
+					}
+				});
+
+				frame.add(panel);
+				frame.setSize(300,300);
+				frame.setLocationRelativeTo(null);
+				frame.setResizable(false);
+				frame.setVisible(true);
+
 			}
 		});
 
