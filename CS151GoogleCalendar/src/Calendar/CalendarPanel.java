@@ -1,4 +1,10 @@
 package Calendar;
+/**
+ * @author Sung Jun Bok
+ * @author Liz Huelfenhaus
+ * @author Vinayan Kathiresan
+ * @version 1.0 8/5/2021
+ */
 
 import java.awt.Color;
 import java.awt.Component;
@@ -6,6 +12,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.time.LocalDate;
 import javax.swing.*;
+
+/**
+ * A class that is used for the printed calendar panel portion of the system
+ */
 
 public class CalendarPanel extends JPanel {
 	private LocalDate cal = LocalDate.now();
@@ -16,6 +26,10 @@ public class CalendarPanel extends JPanel {
 	private JPanel[] days;
 	public static JFrame frame;
 
+	/**
+	 * Constructs a calendar panel with the backend calendar events
+	 * @param e - backend calendar events
+	 */
 	public CalendarPanel(CalendarEvents e) {
 		int width = 360;
 		int height = 450;
@@ -49,6 +63,8 @@ public class CalendarPanel extends JPanel {
 		JButton create = new JButton("CREATE");
 		create.setForeground(Color.white);
 		create.setBackground(Color.RED);
+		create.setBorderPainted(false);
+		create.setOpaque(true);
 		create.addActionListener(event ->
 				createEvent());
 
@@ -68,6 +84,10 @@ public class CalendarPanel extends JPanel {
 		this.draw(cal);
 	}
 
+	/**
+	 * Draws the calendar starting with todays date
+	 * @param cal - the selected date
+	 */
 	public void draw(LocalDate cal) {
 		Calendar c = new Calendar();
 		calPanel = new JPanel();
@@ -98,6 +118,10 @@ public class CalendarPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Changes the month view of the calendar with < > buttons
+	 * @param a - A string that represents the < > button pressed
+	 */
 	public void changeMonths(String a) {
 		if (a.equals("n")) {
 			temp = temp.plusMonths(1);
@@ -118,6 +142,11 @@ public class CalendarPanel extends JPanel {
 		this.draw(temp);
 		this.revalidate();
 	}
+
+	/**
+	 * Changes the day view of the calendar with < > buttons
+	 * @param a - A string that represents the < > button pressed
+	 */
 
 	public void changeDays(String a)
 	{
@@ -321,6 +350,10 @@ public class CalendarPanel extends JPanel {
 			this.revalidate();
 		}
 	}
+
+	/**
+	 * Creates an event when the create event button is selected
+	 */
 
 	public void createEvent() {
 		EventPanel ep = new EventPanel();

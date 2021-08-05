@@ -1,5 +1,10 @@
 package Calendar;
 
+/**
+ * @author Sung Jun Bok
+ * @author Liz Huelfenhaus
+ * @version 1.0 8/5/2021
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +13,10 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+/**
+ * A class for the panel to create a new event
+ */
 
 public class EventPanel extends JPanel implements ItemListener{
     private Event create;
@@ -22,6 +31,11 @@ public class EventPanel extends JPanel implements ItemListener{
     private JButton save;
     private String[] time = {"00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00",
             "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00" , "22:00", "23:00"};
+
+    /**
+     * Constructs a new event panel when the create button is selected in CalendarPanel
+     * Gives the user the ability to provide input for the new event
+     */
 
     public EventPanel(){
         this.setPreferredSize(new Dimension(300,300));
@@ -65,6 +79,10 @@ public class EventPanel extends JPanel implements ItemListener{
         times.add(new JLabel("End:"));
         times.add(end);
 
+        /**
+         * Adds an actionlistener to the save button
+         * Checks that no conflicts for the event are present
+         */
         save = new JButton("Save");
         save.addActionListener(new ActionListener() {
             @Override
@@ -102,6 +120,10 @@ public class EventPanel extends JPanel implements ItemListener{
         this.add(save);
     }
 
+    /**
+     * Called when the combo boxes are changed
+     * @param e - combobox item event
+     */
     public void itemStateChanged(ItemEvent e)
     {
         if(e.getSource() == start)
@@ -156,6 +178,12 @@ public class EventPanel extends JPanel implements ItemListener{
         end = new JComboBox(endtime);
     }
 
+    /**
+     * Creates a date for the combo boxes
+     * @param day
+     * @param month
+     * @param year
+     */
     public void makeDate(int day, int month, int year)
     {
         LocalDate ld = LocalDate.of(year, month, day);
@@ -186,6 +214,9 @@ public class EventPanel extends JPanel implements ItemListener{
         years = new JTextField(year+"");
     }
 
+    /**
+     * @return - returns the created event
+     */
     public Event getEvent(){
         return this.create;
     }

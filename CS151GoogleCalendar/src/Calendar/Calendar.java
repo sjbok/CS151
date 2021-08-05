@@ -1,4 +1,8 @@
 package Calendar;
+/**
+ * @author Sung Jun Bok
+ * @version 1.0 8/5/2021
+ */
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -9,6 +13,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.*;
 
+/**
+ * A class that prints the calendar for the calendar panel
+ */
 public class Calendar extends JPanel
 {	
 	public static LocalDate selectDate = LocalDate.now();
@@ -16,7 +23,12 @@ public class Calendar extends JPanel
 	public static int selectDay;
 	public static int selectMonth;
 	public static int selectYear;
-	
+
+	/**
+	 * Prints the calendar
+	 * @param c - todays date
+	 * @return - returns an array of JPanels that each have a day component
+	 */
 	public JPanel[] printCalendar(LocalDate c)
 	{  
 		day.removeAll(day);
@@ -188,9 +200,5 @@ public class Calendar extends JPanel
 		selectMonth = LocalDate.now().getMonthValue();
 		selectYear = LocalDate.now().getYear();
 		return calPanel;
-	}
-
-	public LocalDate getSelectDate(){
-		return selectDate;
 	}
 }

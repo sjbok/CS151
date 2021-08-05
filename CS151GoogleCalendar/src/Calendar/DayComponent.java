@@ -1,5 +1,10 @@
 package Calendar;
 
+/**
+ * @author Sung Jun Bok
+ * @version 1.0 8/5/2021
+ */
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -7,6 +12,10 @@ import java.awt.Graphics2D;
 import java.time.LocalDate;
 
 import javax.swing.JComponent;
+
+/**
+ * A class that represenets a day in the JPanel array for the calendar view
+ */
 
 public class DayComponent extends JComponent
 {
@@ -17,7 +26,15 @@ public class DayComponent extends JComponent
 	private int month;
 	private int year;
 	private String drawDay;
-	
+
+	/**
+	 * Creates a day component
+	 * @param day - the calendar day
+	 * @param month - the calendar month
+	 * @param year - the calendar year
+	 * @param width - width of the component
+	 * @param height - height of the component
+	 */
 
 	public DayComponent(int day, int month, int year, int width, int height) 
 	{
@@ -60,12 +77,18 @@ public class DayComponent extends JComponent
 			g2d.drawString(drawDay, 25, 25);
 		}
 	}
-	
+
+	/**
+	 * Changes color when the day selected is changed
+	 */
 	public void changeColour()
 	{
 		colour = VERY_LIGHT_RED;
 	}
-	
+
+	/**
+	 * The default color of each day component on the JPanel array
+	 */
 	public void defaultColour()
 	{
 		colour = Color.BLACK;

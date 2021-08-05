@@ -1,23 +1,36 @@
 package Calendar;
+/**
+ * @author Sung Jun Bok
+ * @author Liz Huelfenhaus
+ * @author Vinayan Kathiresan
+ * @version 1.0 8/5/2021
+ */
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * A class that is used to view events in a calendar
+ */
 public class ViewPanel extends JPanel
 {
 	public static JTextArea viewArea;
 	private static CalendarEvents calendarEvents;
 	public static String checkView = "d"; // default day view
 	public static JFrame frame;
+
+	/**
+	 * Constructs a view panel
+	 * @param e - the CalendarEvent reference
+	 */
 	public ViewPanel(CalendarEvents e)
 	{
 		calendarEvents = e;
@@ -49,6 +62,11 @@ public class ViewPanel extends JPanel
 		buttonPanel.add(agenda);
 		filePanel.add(fromfile);
 
+		/**
+		 * Adds an action listener to the day view button
+		 * Calls the function to show the proper view
+		 */
+
 		day.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -60,6 +78,11 @@ public class ViewPanel extends JPanel
 				view(ld, checkView);
 			}
 		});
+
+		/**
+		 * Adds an action listener to the week view button
+		 * Calls the function to show the proper view
+		 */
 
 		week.addActionListener(new ActionListener() {
 			@Override
@@ -73,6 +96,11 @@ public class ViewPanel extends JPanel
 			}
 		});
 
+		/**
+		 * Adds an action listener to the month view button
+		 * Calls the function to show the proper view
+		 */
+
 		month.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -84,6 +112,12 @@ public class ViewPanel extends JPanel
 				view(ld, checkView);
 			}
 		});
+
+		/**
+		 * Adds an action listener to the agenda button
+		 * Creates a new panel to allow the user to select a range
+		 * Calls the view agenda function to print the events for the range
+		 */
 
 		agenda.addActionListener(new ActionListener() {
 			@Override
@@ -148,10 +182,18 @@ public class ViewPanel extends JPanel
 			}
 		});
 
+		/**
+		 * Creates an action listener to the from file button
+		 * Creates a panel with options for the user to select a file
+		 * Creates recurring events from the input file
+		 */
+
 		fromfile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				final JFileChooser fc = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt", "text");
+				fc.setFileFilter(filter);
 		    	fc.setCurrentDirectory(new File("."));
 		    	JPanel p = new JPanel();
 		    	int val = fc.showOpenDialog(p);
@@ -185,18 +227,34 @@ public class ViewPanel extends JPanel
 		this.add(viewArea);
 	}
 
-
+	/**
+	 * The view function for day, month, year
+	 * Enters the calendar events function to show the proper view
+	 * @param t - the date selected
+	 * @param check - A string that represents the preferred view
+	 */
 	public static void view(LocalDate t, String check) { // Make this view method use all different views
 		viewArea.setText(calendarEvents.getEvents(t, check));
 	}
 
+	/**
+	 * The view agenda function for a time frame
+	 * Enters the calender events class to get all the events
+	 * @param sd - start date
+	 * @param ed - end date
+	 * @param text - the text string that will show all events for the range
+	 */
 	public static void viewAgenda(LocalDate sd, LocalDate ed, String text){
 		checkView = "a";
 		calendarEvents.text = "";
 		viewArea.setText(calendarEvents.viewAgenda(sd,ed));
 
 	}
-	
+
+	/**
+	 * Used to parse the events from the input file for recurring events
+	 * @param values - a string that represents data for a recurring event
+	 */
 	public void recurringEvents(String values) {
 		String[] val = values.split(";");
 		String name = val[0];
@@ -228,6 +286,14 @@ public class ViewPanel extends JPanel
 		LocalDate date = LocalDate.of(Calendar.selectYear, Calendar.selectMonth, Calendar.selectDay);
 		view(date, checkView);
 	}
+
+	/**
+	 * Used to created the weekdays for the week view
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @return - returns a string of all days of the week
+	 */
 	
 	private String weekDay(int year, int month, int day) {
 		LocalDate cal= LocalDate.now();

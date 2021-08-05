@@ -1,5 +1,8 @@
 package Calendar;
-
+/**
+ * @author Liz Huelfenhaus
+ * @version 1.0 8/5/2021
+ */
 import java.time.LocalTime;
 
 /**
@@ -10,9 +13,9 @@ public class TimeInterval {
 	private LocalTime end;
 
 	/**
-	 * Creates a time interval
-	 * @param s start time
-	 * @param e end time
+	 * Creates a time interval, removes the colon from the String if necessary
+	 * @param s - start time
+	 * @param e - end time
 	 */
 	TimeInterval(String s, String e){
 		s.replace(":", "");
@@ -21,6 +24,12 @@ public class TimeInterval {
 		this.start = LocalTime.parse(s);
 		this.end = LocalTime.parse(e);
 	}
+
+	/**
+	 * Creates a time interval for recurring events
+	 * @param s - the start hour
+	 * @param e -  the end hour
+	 */
 	
 	TimeInterval(int s, int e){
 		//for recurring events
@@ -28,20 +37,17 @@ public class TimeInterval {
 		this.end=LocalTime.of(e, 0);
 	}
 
-	
-
-	public void setStart(String s){
-		this.start = LocalTime.parse(s);
-	}
-
-	public void setEnd(String e){
-		this.end = LocalTime.parse(e);
-	}
-	
+	/**
+	 * @return - the start time of the time interval
+	 */
 	public LocalTime getst()
 	{
 		return start;
 	}
+
+	/**
+	 * @return - the end time of the time interval
+	 */
 	
 	public LocalTime getet()
 	{
@@ -49,7 +55,7 @@ public class TimeInterval {
 	}
 
 	/**
-	 * @return appended string of time interval
+	 * @return - appended string of time interval
 	 */
 	public String getTime(){
 		return start.toString() + " - " + end.toString();

@@ -1,12 +1,23 @@
 package Calendar;
-
+/**
+ * @author Sung Jun Bok
+ * @version 1.0 8/5/2021
+ */
 import java.util.Comparator;
+
+/**
+ * A class that sorts the events
+ */
 
 class SortTime implements Comparator<Event>
 {
-	/**
-	 * Overrides the Collection.sort comparator to specifically compare Event times
-	 */
+    /**
+     * Overrides the Collection.sort comparator to compare Event times
+     * @param a - the first event
+     * @param b - the second event
+     * @return - returns 0 if times are equal, 1 if the second event is before the first, and -1 if the second event is after the first
+     */
+
     public int compare(Event a, Event b)
     {
         if(a.getTime().getst().isBefore(b.getTime().getst()))

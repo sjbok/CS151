@@ -1,5 +1,10 @@
 
 package Calendar;
+/**
+ * @author Liz Huelfenhaus
+ * @author Sung Bok Jun
+ * @version 1.0 8/5/2021
+ */
 
 import java.awt.Font;
 import java.time.LocalDate;
@@ -8,13 +13,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+/**
+ * The base of the Calendar which contains all the events
+ * Takes events of specific date and adds into HashMap. HashMap is then sorted by time
+ */
+
 public class CalendarEvents {
 	public static HashMap<LocalDate, ArrayList<Event>> hash;
 	public static String text = "";
 
 	/**
-	 * A class that contains all events for the calendar
-	 * Takes events of specific date and adds into HashMap. HashMap is then sorted by time
+	 * Constructs an empty calendar events
+	 * Creates the hashmap of events with the date as the key
 	 */
 
 	CalendarEvents()
@@ -22,6 +32,11 @@ public class CalendarEvents {
 		hash = new HashMap<LocalDate, ArrayList<Event>>();
 	}
 
+	/**
+	 * Adds an event to the calendar
+	 * @param e - the event to be added
+	 * @return - true if the add was successful, and false if there was a conflict
+	 */
 	public static Boolean add(Event e) {
 		ArrayList<Event> events = new ArrayList<Event>(); // Declare new event
 
@@ -45,7 +60,11 @@ public class CalendarEvents {
 	}
 
 	/**
-	 * Checks for time conflicts when creating a new event
+	 * Checks for conflicts when creating events
+	 * @param st - start time
+	 * @param et - end time
+	 * @param ld - date requested
+	 * @return - returns a true if there is a conflict, false is there is no conflict
 	 */
 
 	public static Boolean timeCheck(LocalTime st, LocalTime et, LocalDate ld)
@@ -83,14 +102,20 @@ public class CalendarEvents {
 	}
 
 	/**
-	 * Gets all events on a specific date
-	 * @param ld
+	 * Gets all events on a selected date
+	 * @param ld - the selected date
+	 * @param check - the view that is selected
+	 * @return - returns a String of the events for the appropriate view
 	 */
 
 	public String getEvents(LocalDate ld, String check)
 	{
 		ViewPanel.viewArea.setFont(new Font("Arial", Font.PLAIN, 12));
 		String text = "";
+
+		/**
+		 * Shows the day view for the selected day
+		 */
 		if(check.equals("d"))
 		{
 			String month = ld.getMonth().toString();
@@ -112,6 +137,11 @@ public class CalendarEvents {
 				return text;
 			}
 		}
+		/**
+		 * Shows the week view for the selected day starting from
+		 * the previous Sunday to the following Saturday
+		 */
+
 		else if(check.equals("w"))
 		{			
 			ViewPanel.viewArea.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -148,6 +178,9 @@ public class CalendarEvents {
 			}
 			return out;
 		}
+		/**
+		 * Shows the month view for the selected month
+		 */
 		else if(check.equals("m"))
 		{
 			ViewPanel.viewArea.setFont(new Font("Arial", Font.PLAIN, 10));
@@ -208,6 +241,13 @@ public class CalendarEvents {
 		}
 		return text;
 	}
+
+	/**
+	 * Shows the agenda by recursively collecting all dates in the range
+	 * @param sd - start date for the range
+	 * @param ed - end date for the range
+	 * @return - returns a String of all agenda events
+	 */
 	
 	public String viewAgenda(LocalDate sd, LocalDate ed){
 		ViewPanel.viewArea.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -222,8 +262,6 @@ public class CalendarEvents {
 		}
 		if(text.equals(""))
 			text = "No events during this range.";
-
-
 		return text;
 	}
 }
