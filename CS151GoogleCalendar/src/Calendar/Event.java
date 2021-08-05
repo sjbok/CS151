@@ -25,6 +25,8 @@ public class Event {
 		return name + ":\t\t" + ti.getTime();
 	}
 
+	public String agendaString(){ return ld.toString() + " " + name; }
+
 	public LocalDate getDate() {
 		return ld;
 	}

@@ -1,26 +1,18 @@
 package Calendar;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public class ViewPanel extends JPanel
 {
 	public static JTextArea viewArea;
 	private static CalendarEvents calendarEvents;
 	public static String checkView = "d"; // default day view
-
+	public static JFrame frame;
 	public ViewPanel(CalendarEvents e)
 	{
 		calendarEvents = e;
@@ -88,6 +80,69 @@ public class ViewPanel extends JPanel
 			}
 		});
 
+		agenda.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				frame = new JFrame("Agenda");
+
+				JPanel main = new JPanel(new BorderLayout());
+
+				JPanel panel = new JPanel();
+				JButton submit = new JButton("Submit");
+
+				JLabel format = new JLabel("             MM/DD/YYYY Format             ");
+				JLabel spacer = new JLabel("                                            ");
+				JPanel formatPanel = new JPanel();
+				formatPanel.add(format);
+				formatPanel.add(spacer);
+
+				JTextField startDate = new JTextField(15);
+				JLabel start = new JLabel("Start Date:");
+
+				JTextField endDate = new JTextField(15);
+				JLabel end = new JLabel(" End Date:");
+
+				main.add(formatPanel, BorderLayout.NORTH);
+
+				panel.add(start);
+				panel.add(startDate);
+
+				panel.add(end);
+				panel.add(endDate);
+
+				JPanel panel2 = new JPanel();
+				panel2.add(submit);
+
+				main.add(panel, BorderLayout.CENTER);
+				main.add(panel2, BorderLayout.SOUTH);
+
+				submit.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						LocalDate sd = LocalDate.parse(startDate.getText(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+						LocalDate ed = LocalDate.parse(endDate.getText(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+
+						if(ed.isAfter(sd)) {
+							JOptionPane.showMessageDialog(null, "Success.");
+							viewAgenda(sd,ed,"");
+							startDate.setText("");
+							endDate.setText("");
+							frame.setVisible(false);
+						}
+						else
+							JOptionPane.showMessageDialog(null, "Invalid range, please try again.");
+					}
+				});
+
+				frame.setResizable(false);
+				frame.getContentPane().add(main);
+				frame.pack();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+			}
+		});
+
 		this.add(filePanel);
 		this.add(Box.createRigidArea(new Dimension(0, 20)));
 		this.add(buttonPanel);
@@ -99,4 +154,8 @@ public class ViewPanel extends JPanel
 		viewArea.setText(calendarEvents.getEvents(t, check));
 	}
 
+	public static void viewAgenda(LocalDate sd, LocalDate ed, String text){
+		viewArea.setText(calendarEvents.viewAgenda(sd,ed));
+
+	}
 }

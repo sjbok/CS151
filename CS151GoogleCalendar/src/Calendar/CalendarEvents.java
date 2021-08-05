@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 public class CalendarEvents {
 	public static HashMap<LocalDate, ArrayList<Event>> hash;
+	public static String text = "";
 
 	/**
 	 * A class that contains all events for the calendar
@@ -172,6 +173,24 @@ public class CalendarEvents {
 			}
 			return out;
 		}
+
+		return text;
+	}
+
+	public String viewAgenda(LocalDate sd, LocalDate ed){
+		if(!sd.isAfter(ed)) {
+			if(hash.containsKey(sd)) {
+				for (Event e : hash.get(sd)) {
+					text += e.agendaString();
+					text += "\n";
+				}
+			}
+			viewAgenda(sd.plusDays(1), ed);
+		}
+		if(text.equals(""))
+			text = "No events during this range.";
+
+
 		return text;
 	}
 }

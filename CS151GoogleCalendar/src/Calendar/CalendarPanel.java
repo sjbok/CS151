@@ -287,7 +287,4 @@ public class CalendarPanel extends JPanel {
 		frame.setVisible(true);
 	}
 
-	public LocalDate getSelectedDate(Calendar c){
-		return c.getSelectDate();
-	}
 }
